@@ -1,0 +1,56 @@
+﻿<Window x:Class="WpfControlsAndApis.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfControlsAndApis"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <TabControl Name="MyTabControl" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <TabItem Header="Ink API">
+                <StackPanel Background="#FFE5E5E5">
+                    <ToolBar Name="InkToolBar" Height="60">
+                        <Border Margin="0,2,0,2.4" Width="280" VerticalAlignment="Center">
+                            <WrapPanel>
+                                <RadioButton x:Name="inkRadio" Margin="5,10" Content="Ink Mode" Click="RadioButtonClicked" IsChecked="True"/>
+                                <RadioButton x:Name="eraseRadio" Margin="5,10" Click="RadioButtonClicked" Content="Erase Mode" />
+                                <RadioButton x:Name="selectRadio" Margin="5,10" Click="RadioButtonClicked" Content="Select Mode" />
+                            </WrapPanel>
+                        </Border>
+                        <Separator/>
+                        <ComboBox x:Name="comboColors" Width="175" Margin="10,0,0,0" SelectionChanged="ColorChanged">
+                            <ComboBoxItem Content="Red"/>
+                            <ComboBoxItem Content="Green"/>
+                            <ComboBoxItem Content="Blue"/>
+                        </ComboBox>
+                        <Separator/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Button Grid.Column="0" x:Name="btnSave" Margin="10,10" Width="70" Content="Save Data" Click="SaveData" />
+                            <Button Grid.Column="1" x:Name="btnLoad" Margin="10,10" Width="70" Content="Load Data" Click="LoadData" />
+                            <Button Grid.Column="2" x:Name="btnClear" Margin="10,10" Width="70" Content="Clear" Click="Clear" />
+                        </Grid>
+                    </ToolBar>
+                    <InkCanvas x:Name="MyInkCanvas" Background="#FFB6F4F1"/>
+                </StackPanel>
+            </TabItem>
+            <TabItem x:Name="tabDataBinding" Header="Data Binding">
+                <StackPanel Width="250" DataContext="{Binding ElementName=mySB}" >
+                    <Label Content="Move to scroll bar to see the current value"/>
+                    <ScrollBar x:Name="mySB" Orientation="Horizontal" Height="30" Minimum="1" Maximum="100" LargeChange="1" SmallChange="1"/>
+                    <Label x:Name="labelSBThumb" Height="30" BorderBrush="Blue" BorderThickness="2" Content="{Binding Path=Value}"/>
+                    <Button Content="Click" Height="200" FontSize="{Binding Path=Value}"/>
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="DataGrid">
+                <Grid Background="#FFE5E5E5"></Grid>
+            </TabItem>
+        </TabControl>
+
+    </Grid>
+</Window>
